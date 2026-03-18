@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo y Cotizaciones - Mania Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Lato', 'sans-serif'],
+                        'body': ['Lato', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-blue': '#007AFF',
+                        'brand-dark': '#0F172A',
+                        'brand-gray': '#F8FAFC',
+                        'accent-blue': '#3B82F6',
+                        'slate-custom': '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0F172A;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 122, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 40%);
+            font-family: 'Lato', sans-serif;
+        }
+
+        .nav-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card-modern {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+
+        .card-modern:hover {
+            border-color: #007AFF;
+            background: rgba(30, 41, 59, 0.6);
+            box-shadow: 0 20px 40px -15px rgba(0, 122, 255, 0.2);
+        }
+
+        .btn-tech {
+            background: #007AFF;
+            transition: all 0.3s ease;
+        }
+
+        .btn-tech:hover {
+            background: #0056b3;
+            box-shadow: 0 0 20px rgba(0, 122, 255, 0.4);
+        }
+
+        .filter-btn {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+        }
+
+        .filter-btn.active {
+            background: #007AFF;
+            border-color: #007AFF;
+            color: white;
+        }
+
+        .card-img-container {
+            height: 120px;
+            overflow: hidden;
+            position: relative;
+        }
+        .card-img-container img {
+            width: 100%; height: 100%; object-fit: cover; opacity: 0.8; transition: transform 0.5s ease;
+        }
+        .card-modern:hover .card-img-container img { transform: scale(1.1); opacity: 1; }
+
+        .loading-spinner {
+            display: inline-block; width: 20px; height: 20px;
+            border: 3px solid rgba(255,255,255,0.3); border-radius: 50%;
+            border-top-color: white; animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="text-white">
+
+    <nav class="fixed top-0 w-full z-50 nav-glass">
+    <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="flex justify-between items-center">
+            <a href="index.html">
+                <img src="../logo.png" alt="Mania Digital" class="h-9 md:h-11 w-auto object-contain">
+            </a>
+
+            <button id="menu-btn" class="md:hidden text-slate-500 hover:text-brand-blue focus:outline-none transition-transform">
+                <i id="menu-icon" class="fas fa-bars text-2xl"></i>
+            </button>
+
+            <ul class="hidden md:flex gap-8 items-center font-bold">
+                <li><a href="index.html#inicio" class="text-slate-500 hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">Inicio</a></li> 
+                <li><a href="contacto.html" class="text-slate-500 hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">Contacto</a></li> 
+                <li><a href="#cotizacion" class="px-6 py-2 bg-brand-blue text-white rounded-full text-sm hover:bg-slate-900 transition-all uppercase tracking-widest shadow-lg shadow-blue-500/20">Cotizar</a></li>
+            </ul>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden pt-6 pb-4">
+            <ul class="flex flex-col gap-5 font-bold border-t border-gray-100 pt-6">
+                <li><a href="index.html#inicio" class="block text-slate-500 hover:text-brand-blue text-sm uppercase tracking-wider">Inicio</a></li>
+                <li><a href="contacto.html" class="block text-slate-500 hover:text-brand-blue text-sm uppercase tracking-wider">Contacto</a></li>
+                <li><a href="#cotizacion" class="block text-center py-3 bg-brand-blue text-white rounded-xl text-sm uppercase tracking-widest">Cotizar</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const icon = document.getElementById('menu-icon');
+
+        btn.addEventListener('click', () => {
+            const isHidden = menu.classList.toggle('hidden');
+            
+            // Opcional: Cambia el icono de "hamburguesa" a "X"
+            if (isHidden) {
+                icon.classList.replace('fa-times', 'fa-bars');
+            } else {
+                icon.classList.replace('fa-bars', 'fa-times');
+            }
+        });
+
+        // Cerrar al hacer click en un enlace
+        menu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+                icon.classList.replace('fa-times', 'fa-bars');
+            });
+        });
+    });
+</script>
+    <section id="catalogo" class="py-32 px-6 bg-slate-900/30 mt-10">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h3 class="text-5xl font-black mb-4">Catálogo de <span class="text-brand-blue">Productos</span></h3>
+                <p class="text-gray-400 mt-4">Seleccione los componentes que desea incluir en su cotización formal.</p>
+            </div>
+
+            <div class="max-w-2xl mx-auto mb-10">
+                <div class="relative">
+                    <input type="text" id="searchInput" oninput="searchProducts()" placeholder="Buscar por nombre..." 
+                        class="w-full p-5 pl-14 bg-slate-800/40 border border-white/10 rounded-2xl text-lg outline-none text-white">
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-2 mb-12">
+                <button onclick="filterItems('all', event)" class="filter-btn active px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Todo</button>
+                <button onclick="filterItems('Computadores', event)" class="filter-btn px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Computadores</button>
+                <button onclick="filterItems('Componentes', event)" class="filter-btn px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Componentes</button>
+                <button onclick="filterItems('Periféricos', event)" class="filter-btn px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Periféricos</button>
+                <button onclick="filterItems('Redes', event)" class="filter-btn px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Redes</button>
+                <button onclick="filterItems('Seguridad', event)" class="filter-btn px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Seguridad</button>
+                <button onclick="filterItems('Impresión', event)" class="filter-btn px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Impresión</button>
+                <button onclick="filterItems('Suministros', event)" class="filter-btn px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Suministros</button>
+                <button onclick="filterItems('Software', event)" class="filter-btn px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Software</button>
+                <button onclick="filterItems('POS', event)" class="filter-btn px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">POS</button>
+                <button onclick="filterItems('Celulares', event)" class="filter-btn px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest">Celulares</button>
+            </div> <div id="products-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+                </div>
+        </div>
+    </section>
+
+    <section id="cotizacion" class="py-32 px-6">
+        <div class="max-w-5xl mx-auto bg-white rounded-[2rem] overflow-hidden flex flex-col md:flex-row shadow-2xl">
+            <div class="bg-brand-blue p-12 text-white md:w-1/3">
+                <h3 class="text-4xl font-black mb-6">Inicie su Cotización.</h3>
+                <p class="text-blue-100 mb-8 font-light">Recibirá una propuesta formal en menos de 2 horas hábiles.</p>
+            </div>
+            <div class="p-12 md:w-2/3 text-slate-900">
+                <div id="cart-preview" class="mb-10 p-4 bg-slate-50 rounded-xl border-2 border-dashed border-slate-200">
+                    <p class="text-slate-400 text-sm italic" id="cart-status">No ha seleccionado productos aún</p>
+                </div>
+                
+                <form id="quoteForm" class="space-y-4">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <input type="text" name="empresa" id="empresa" placeholder="Empresa" required class="w-full p-4 bg-slate-100 rounded-xl outline-none">
+                        <input type="email" name="email" id="email" placeholder="Email Corporativo" required class="w-full p-4 bg-slate-100 rounded-xl outline-none">
+                    </div>
+                    <input type="hidden" name="productos_seleccionados" id="hidden-products">
+                    <textarea name="mensaje" id="mensaje" placeholder="Cantidades o detalles adicionales..." rows="4" class="w-full p-4 bg-slate-100 rounded-xl outline-none"></textarea>
+                    
+                    <button type="submit" id="submitBtn" class="w-full btn-tech p-5 rounded-xl font-black uppercase text-xs tracking-widest text-white">
+                        Solicitar Cotización Formal
+                    </button>
+                    <div id="form-status" class="hidden mt-4 p-4 rounded-xl text-center font-bold"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 px-6 border-t border-white/5">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-gray-500 text-sm font-medium uppercase tracking-[0.3em]">© 2026 Mania Digital</p>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        const productsData = [
+            // COMPUTADORES
+            { group: 'Computadores', name: 'Laptops / Portátiles Corporativos', img: './foto-1.jpg' },
+            { group: 'Computadores', name: 'Pcs Escritorio / Desktops', img: './foto-2.jpg' },
+            { group: 'Computadores', name: 'Todo-en-Uno (AIO)', img: './foto-3.jpg' },
+            { group: 'Computadores', name: 'Servidores Rack/Tower', img: './foto-4.jpg' },
+            { group: 'Computadores', name: 'Tabletas / 2-en-1', img: './foto-5.jpg' },
+            { group: 'Computadores', name: 'Maletines y Mochilas', img: './foto-6.jpg' },
+            { group: 'Computadores', name: 'Cables Externos', img: './foto-7.jpg' },
+            { group: 'Computadores', name: 'Seguridad / Kensington locks', img: './foto-8.jpg' },
+            { group: 'Computadores', name: 'Mouse Pads y Wrist Pads', img: './foto-9.jpg' },
+            { group: 'Computadores', name: 'Cobertores y Kits Limpieza', img: './foto-10.jpg' },
+            { group: 'Computadores', name: 'Estaciones de Trabajo', img: './foto-11.jpg' },
+
+            // COMPONENTES
+            { group: 'Componentes', name: 'Procesadores / CPU', img: './foto-12.jpg' },
+            { group: 'Componentes', name: 'Memorias RAM DDR4/DDR5', img: './foto-13.jpg' },
+            { group: 'Componentes', name: 'Discos Estado Sólido SSD', img: './foto-14.jpg' },
+            { group: 'Componentes', name: 'Tarjetas de Video / GPU', img: './foto-15.jpg' },
+            { group: 'Componentes', name: 'Placas Madre / MB', img: './foto-16.jpg' },
+            { group: 'Componentes', name: 'Fuentes de Poder / PSU', img: './foto-17.jpg' },
+            { group: 'Componentes', name: 'Chasis / Gabinetes', img: './foto-18.jpg' },
+            { group: 'Componentes', name: 'Ventiladores y Enfriamiento', img: './foto-19.jpg' },
+            { group: 'Componentes', name: 'Adaptadores Internos', img: './foto-20.jpg' },
+            { group: 'Componentes', name: 'UPS / Respaldo Energía', img: './foto-56.jpg' },
+            { group: 'Componentes', name: 'Reguladores Voltaje', img: './foto-57.jpg' },
+            { group: 'Componentes', name: 'Discos Externos HDD/SSD', img: './foto-58.jpg' },
+            { group: 'Componentes', name: 'Memorias Flash USB', img: './foto-59.jpg' },
+
+            // PERIFÉRICOS
+            { group: 'Periféricos', name: 'Monitores LCD/LED', img: './foto-21.jpg' },
+            { group: 'Periféricos', name: 'Teclados y Numéricos', img: './foto-22.jpg' },
+            { group: 'Periféricos', name: 'Mouses / Ratones', img: './foto-23.jpg' },
+            { group: 'Periféricos', name: 'Kits Teclado/Mouse', img: './foto-23.1.jpg' },
+            { group: 'Periféricos', name: 'Cámaras Web', img: './foto-24.jpg' },
+            { group: 'Periféricos', name: 'Audífonos / Audio', img: './foto-25.jpg' },
+            { group: 'Periféricos', name: 'Tabletas Digitales', img: './foto-26.jpg' },
+            { group: 'Periféricos', name: 'Proyectores', img: './foto-52.jpg' },
+            { group: 'Periféricos', name: 'Pantallas Proyección', img: './foto-53.jpg' },
+            { group: 'Periféricos', name: 'Televisores / Displays', img: './foto-54.jpg' },
+            { group: 'Periféricos', name: 'Parlantes y Bocinas', img: './foto-55.jpg' },
+
+            // REDES
+            { group: 'Redes', name: 'Switches / Hubs', img: './foto-27.jpg' },
+            { group: 'Redes', name: 'Routers / WiFi', img: './foto-28.jpg' },
+            { group: 'Redes', name: 'Puntos de Acceso (AP)', img: './foto-29.jpg' },
+            { group: 'Redes', name: 'Cableado y Conectores', img: './foto-30.jpg' },
+            { group: 'Redes', name: 'Racks y Gabinetes Red', img: './foto-32.jpg' },
+
+            // SEGURIDAD
+            { group: 'Seguridad', name: 'Cámaras CCTV Análogas', img: './foto-33.jpg' },
+            { group: 'Seguridad', name: 'Cámaras IP / Red', img: './foto-34.jpg' },
+            { group: 'Seguridad', name: 'DVRs / NVRs (Grabación)', img: './foto-35.jpg' },
+            { group: 'Seguridad', name: 'Control Acceso / Tarjetas', img: './foto-36.jpg' },
+            { group: 'Seguridad', name: 'Paneles Intrusión', img: './foto-37.jpg' },
+
+            // IMPRESIÓN
+            { group: 'Impresión', name: 'Impresoras Láser B/N y Color', img: './foto-38.jpg' },
+            { group: 'Impresión', name: 'Impresoras Inyección Tinta', img: './foto-39.jpg' },
+            { group: 'Impresión', name: 'Multifuncionales', img: './foto-40.jpg' },
+            { group: 'Impresión', name: 'Plotters Formato Ancho', img: './foto-40.1.jpg' },
+            { group: 'Impresión', name: 'Escáneres Documentos', img: './foto-41.jpg' },
+
+            // SUMINISTROS
+            { group: 'Suministros', name: 'Cartuchos Tóner', img: './foto-42.jpg' },
+            { group: 'Suminitros', name: 'Botellas Tinta / Ink-Jet', img: './foto-43.jpg' },
+            { group: 'Suministros', name: 'Papel Especializado', img: './foto-44.jpg' },
+            { group: 'Suministros', name: 'Kits de Mantenimiento', img: './foto-45.jpg' },
+
+            // SOFTWARE
+            { group: 'Software', name: 'Microsoft (Windows, Office)', img: './foto-46.jpg' },
+            { group: 'Software', name: 'Antivirus (ESET, McAfee)', img: './foto-47.jpg' },
+            
+            // POS
+            { group: 'POS', name: 'Lectores Código Barras', img: './foto-48.jpg' },
+            { group: 'POS', name: 'Cajas de Dinero', img: './foto-49.jpg' },
+            { group: 'POS', name: 'Impresoras Recibos', img: './foto-50.jpg' },
+            { group: 'POS', name: 'Terminales / Handhelds', img: './foto-51.jpg' },
+
+            // CELULARES
+            { group: 'Celulares', name: 'Smartphones / Teléfonos Inteligentes', img: './foto-60.jpg' },
+            { group: 'Celulares', name: 'Accesorios para celulares', img: './foto-61.jpg' },
+            { group: 'Celulares', name: 'Smartwatch / Relojes inteligentes', img: './foto-62.jpg' },
+        ];
+
+        let cart = [];
+        let currentCategory = 'all';
+
+        (function() {
+            emailjs.init('YblM1Y8k4CKaHIFg0');
+        })();
+
+        function renderFilteredGrid(data) {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = data.map(p => `
+                <div class="card-modern rounded-2xl group flex flex-col">
+                    <div class="card-img-container">
+                        <img src="${p.img}" alt="${p.name}" loading="lazy">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent"></div>
+                    </div>
+                    <div class="p-4 text-center flex-grow flex flex-col justify-between">
+                        <h4 class="text-[10px] font-black uppercase tracking-tight h-8 flex items-center justify-center leading-tight mb-3 italic text-white">${p.name}</h4>
+                        <button onclick="addToCart('${p.name}', event)" class="w-full py-2 bg-white/5 border border-white/10 rounded-lg text-white text-[9px] font-bold uppercase group-hover:bg-brand-blue transition-all">Añadir</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.filterItems = (group, event) => {
+            currentCategory = group;
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            searchProducts();
+        };
+
+        function searchProducts() {
+            const term = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = productsData.filter(p => 
+                p.name.toLowerCase().includes(term) && (currentCategory === 'all' || p.group === currentCategory)
+            );
+            renderFilteredGrid(filtered);
+        }
+
+        window.addToCart = (name, event) => {
+            if (!cart.includes(name)) {
+                cart.push(name);
+                updateQuoteUI();
+            }
+            const btn = event.currentTarget;
+            btn.innerText = "¡AÑADIDO!";
+            btn.classList.add('bg-green-600');
+            setTimeout(() => { btn.innerText = "Añadir"; btn.classList.remove('bg-green-600'); }, 1000);
+        };
+
+        function updateQuoteUI() {
+            const status = document.getElementById('cart-status');
+            const hiddenInput = document.getElementById('hidden-products');
+            if (cart.length > 0) {
+                status.innerHTML = `<span class="text-brand-blue font-bold">${cart.length} seleccionados:</span><br>${cart.join(', ')}`;
+                hiddenInput.value = cart.join(', ');
+            }
+        }
+
+        document.getElementById('quoteForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="loading-spinner"></span> ENVIANDO...';
+            
+            try {
+                const params = {
+                    empresa: document.getElementById('empresa').value,
+                    email: document.getElementById('email').value,
+                    mensaje: document.getElementById('mensaje').value,
+                    productos: document.getElementById('hidden-products').value,
+                    fecha: new Date().toLocaleString()
+                };
+                await emailjs.send('service_ibhg3ug', 'template_n0frdmn', params);
+                document.getElementById('form-status').innerHTML = "✓ Enviado con éxito.";
+                document.getElementById('form-status').className = "mt-4 p-4 rounded-xl text-center bg-green-100 text-green-800 block";
+                this.reset();
+                cart = [];
+                updateQuoteUI();
+            } catch (err) {
+                document.getElementById('form-status').innerHTML = "X Error al enviar.";
+                document.getElementById('form-status').className = "mt-4 p-4 rounded-xl text-center bg-red-100 text-red-800 block";
+            } finally {
+                btn.disabled = false;
+                btn.innerText = 'Solicitar Cotización Formal';
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => renderFilteredGrid(productsData));
+    </script>
+</body>
+</html>
