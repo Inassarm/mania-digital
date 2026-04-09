@@ -324,18 +324,35 @@
 
     <script>
         function cargarAnuncios() {
-            const contenedor = document.getElementById('contenedor-anuncios');
-            if(typeof MIS_ANUNCIOS !== 'undefined') {
-                contenedor.innerHTML = MIS_ANUNCIOS.map(anuncio => `
-                    <div class="card-modern p-8 rounded-[2rem] h-full">
-                        <p class="text-xl font-bold mb-4">${anuncio.titulo}</p>
-                        <p class="text-gray-400 text-sm mb-6">${anuncio.descripcion}</p>
-                        
+    const contenedor = document.getElementById('contenedor-anuncios');
+    
+    if (typeof MIS_ANUNCIOS !== 'undefined') {
+        // Solo anuncios que tengan un título real
+        const anunciosReales = MIS_ANUNCIOS.filter(a => a.titulo && a.titulo.trim() !== "");
+
+        if (anunciosReales.length > 0) {
+            contenedor.innerHTML = anunciosReales.map(anuncio => `
+                <div class="card-modern p-8 rounded-[2rem] h-full border border-white/5 bg-white/5 backdrop-blur-sm">
+                    <p class="text-xl font-bold mb-4">${anuncio.titulo}</p>
+                    <p class="text-gray-400 text-sm mb-6">${anuncio.descripcion}</p>
+                </div>
+            `).join('');
+        } else {
+            
+            contenedor.innerHTML = `
+                <div class="col-span-full py-16 text-center animate-fade-in">
+                    <div class="inline-block p-6 rounded-full bg-white/5 border border-white/10 mb-6">
+                        <i class="fas fa-bullhorn text-4xl text-brand-blue opacity-50"></i>
                     </div>
-                `).join('');
-            }
+                    <h3 class="text-3xl font-black italic text-white mb-3">
+                        ¡Nuevos anuncios <span class="text-brand-blue">próximamente!</span>
+                    </h3>
+                </div> 
+            `;
         }
+    }
+}
         document.addEventListener('DOMContentLoaded', cargarAnuncios);
-    </script>
+    </script>   
 </body>
 </html>

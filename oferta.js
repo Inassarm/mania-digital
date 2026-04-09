@@ -14,8 +14,8 @@ const MIS_OFERTAS = [
 
 const MIS_ANUNCIOS = [
     {
-        titulo: "Vacaciones de Semana Santa",
-        descripcion: "Por motivo de la Semana Santa estaremos cerrados del lunes 30 de marzo  al viernes 3 de abril reanudaremos labores el Lunes 6 de abril.",
+        titulo: "",
+        descripcion: "",
         esPopular: false
     },
     
