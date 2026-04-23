@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mania Digital - Tecnología y Suministros</title>
+    <link rel="preload" as="image" href="/fondo.jpg">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="icon" href="Mini-logo.png" type="image/png">
+    <link rel="icon" href="isotipo.jpg" type="image/jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -28,11 +29,16 @@
                     },
                     animation: {
                         'slide-up': 'slideUp 0.8s ease-out',
+                        'scroll': 'scroll 30s linear infinite',
                     },
                     keyframes: {
                         slideUp: {
                             '0%': { opacity: '0', transform: 'translateY(20px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        scroll: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(calc(-50%))' }
                         }
                     }
                 }
@@ -41,19 +47,45 @@
     </script>
 
     <style>
-        body {
-            background-color: #0F172A;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(0, 122, 255, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 40%);
-            font-family: 'Lato', sans-serif;
-        }
 
-        .nav-glass {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
+    body {
+        background-color: #0F172A;
+        background-image: url('catalogo-bg.jpg'); 
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        font-family: 'Lato', sans-serif;
+        min-height: 100vh;
+    }
+
+    .bg-hero {
+        background-image: linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.7)) !important;
+        background-attachment: fixed;
+    }
+
+    section:not(#inicio) {
+        background-image: linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)) !important;
+        position: relative;
+    }
+
+    /* Estilo de las tarjetas para que resalten */
+    .card-modern {
+        background: rgba(30, 41, 59, 0.5);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    section {
+        background: transparent !important;
+    }
+
+    .nav-glass {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    
 
         .gradient-text-blue {
             background: linear-gradient(135deg, #3B82F6 0%, #007AFF 100%);
@@ -68,23 +100,52 @@
             transition: all 0.4s ease;
         }
 
-        .card-modern:hover {
-            border-color: #007AFF;
-            background: rgba(30, 41, 59, 0.6);
-            box-shadow: 0 20px 40px -15px rgba(0, 122, 255, 0.2);
-        }
-
         .btn-tech {
             background: #007AFF;
+            color: white;
+            border: 2px solid #007AFF;
             transition: all 0.3s ease;
         }
 
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
         .btn-tech:hover {
             background: #0056b3;
             box-shadow: 0 0 20px rgba(0, 122, 255, 0.4);
             transform: scale(1.02);
         }
 
+        .bg-hero {
+            background-image: 
+                linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), 
+                url("fondo.jpg");
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slider-wrapper {
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+        }
+
+        footer {
+        background: #0F172A !important; 
+        position: relative;
+        z-index: 10;
+    }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0F172A; }
         ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 10px; }
@@ -135,28 +196,27 @@
         menu.classList.toggle('hidden');
     });
 
-    // Cerrar menú al hacer click en un enlace (opcional)
     menu.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => menu.classList.add('hidden'));
     });
 </script>
 
-   <section id="inicio" class="min-h-screen flex items-center justify-center pt-20 px-6">
+   <section id="inicio" class="min-h-screen flex items-center bg-hero bg-cover justify-center pt-20 px-6">
     <div class="max-w-7xl mx-auto text-center">
-        <div class="animate-slide-up space-y-8">
-            <h1 class="font-display text-5xl md:text-8xl font-black text-white leading-tight">
-                <br>Su opción en <br><span class="gradient-text-blue text-6xl md:text-8xl">tecnología y suministros</span>
+        <div class="animate-slide-up space-y-6"> <h1 class="font-display text-5xl md:text-7xl font-black text-white leading-[1.1]">
+                Su opción en <br>
+                <span class="gradient-text-blue">tecnología y suministros</span>
             </h1>
-            <p class="text-gray-400 text-xl md:text-2xl max-w-3xl mx-auto font-light leading-relaxed">
-                Maximize la productividad de su empresa con tecnología de punta y suministros garantizados.
+            <p class="text-gray-200 text-xl md:text-2xl max-w-3xl mx-auto font-light leading-relaxed">
+                Maximice la productividad de su empresa con tecnología de punta y suministros garantizados.
             </p>
             
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-6 pt-10">
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-6 pt-6">
                 <a href="catalogo.html" class="btn-tech px-10 py-5 rounded-full font-bold uppercase text-xs tracking-[0.2em] w-full sm:w-auto">
                     Cotizar ahora
                 </a>
                 
-                <a href="#ofertas" class="btn-tech px-10 py-5 rounded-full font-bold uppercase text-xs tracking-[0.2em] w-full sm:w-auto">
+                <a href="#ofertas" class="btn-outline px-10 py-5 rounded-full font-bold uppercase text-xs tracking-[0.2em] w-full sm:w-auto">
                     Ver ofertas
                 </a>
             </div>
@@ -164,7 +224,17 @@
     </div>
 </section>
 
-    <section id="servicios" class="py-32 pb-8 px-6">
+    <section class="py-12 border-t border-white/5 bg-slate-900/30 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h4 class="text-gray-500 text-[10px] font-bold uppercase tracking-[0.4em] mb-10">Marcas Destacadas</h4>
+            <div class="relative flex overflow-x-hidden">
+                <div id="brands-container" class="flex items-center gap-16 md:gap-24 animate-scroll whitespace-nowrap">
+                    </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="servicios" class="pt-16 pb-8 px-6">
         <div class="max-w-7xl mx-auto px-4">
             <div class="flex mb-16">
                 <h3 class="text-5xl font-black text-white italic text-center"> 
@@ -187,17 +257,14 @@
         </div>
         <div class="card-modern p-10 rounded-3xl w-full md:w-[calc(33.333%-2rem)]">
             <h4 class="text-2xl font-black mb-4 uppercase italic">Nuestra Tecnología</h4>
-            <p class="text-gray-400 leading-relaxed">Laptops, Pcs escritorio, Tabletas, Movilidad.</p>
+            <p class="text-gray-400 leading-relaxed">Laptops, Pcs escritorio, servidores, tabletas, movilidad, headsets, equipo de colaboración de audio y video, redes, oficina, suministros y mucho más.</p>
         </div>
-        <div class="card-modern p-10 rounded-3xl w-full md:w-[calc(33.333%-2rem)]">
-            <h4 class="text-2xl font-black mb-4 uppercase italic">Distribuidor autorizado EPSON</h4>
-            <p class="text-gray-400 leading-relaxed">"Con Ecotank tu trabajo no tiene que parar"</p>
-        </div>
+       
     </div>
         </div>
     </section>
 
-    <section id="anuncios" class="py-20 px-6">
+    <section id="anuncios" class="pt-10 pb-10 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center gap-4 mb-12">
                 <span class="flex h-3 w-3 relative">
@@ -213,7 +280,7 @@
     </section>
 
 
-    <section id="ofertas" class="py-20 pb-2 px-6">
+    <section id="ofertas" class="pt-10 pb-10 px-6">
         <div class="max-w-7xl mx-auto">
             <div class="flex items-center gap-4 mb-12">
                 <span class="flex h-3 w-3 relative">
@@ -248,111 +315,147 @@
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <div class="flex items-center gap-3 text-gray-400">
-                            <i class="fas fa-envelope text-orange-500 text-base w-5 text-center"></i>
-                            <span class="text-xs font-medium tracking-wide">ventas@maniadigital.com</span>
-                        </div>
-                        <div class="flex items-center gap-3 text-gray-400">
-                            <i class="fas fa-phone text-orange-500 text-base w-5 text-center"></i>
-                            <span class="text-xs font-medium tracking-wide">+506 2290-7232</span>
+                        <div class="flex items-center gap-4 text-gray-300">
+    <i class="fas fa-envelope text-orange-500 text-lg w-6 text-center"></i>
+    <span class="text-base font-bold tracking-wider">ventas@maniadigital.com</span>
+</div>
+                        <div class="flex items-center gap-4 text-gray-300">
+                            <i class="fas fa-phone text-orange-500 text-lg w-6 text-center"></i>
+                            <span class="text-base font-bold tracking-wider">+506 2290-7232</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div> <div class="relative h-[450px] rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.9813!2d-84.1011!3d9.9347!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOcKwNTYnMDUuMCJOIDg0wrAwNicwNC4wIlc!5e0!3m2!1ses!2scr!4v1680000000000!5m2!1ses!2scr" 
-                    width="100%" height="100%" style="border:0;" 
-                    allowfullscreen="" loading="lazy">
-            </iframe>
+            <iframe 
+    width="100%" 
+    height="450" 
+    style="border:0;" 
+    src="https://maps.google.com/maps?q=Mania%20Digital%20Costa%20Rica&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+    allowfullscreen>
+</iframe>
         </div> 
     </div> 
 </section>
 
 
-    <footer class="py-20 px-6 border-t border-white/5">
-        <div class="max-w-7xl mx-auto text-center">
-            <p class="text-gray-500 text-sm font-medium uppercase tracking-[0.3em]">© 2026 Mania Digital</p>
+    <footer class="py-20 px-6 border-t border-white/5 bg-[#0F172A]">
+        <div class="max-w-7xl mx-auto text-center space-y-4">
+            <p class="text-gray-500 text-sm font-medium uppercase tracking-[0.3em]">
+                © 2026 Mania Digital
+            </p>
+            
+            <div class="pt-2">
+                <a href="politica.html" class="text-gray-600 hover:text-brand-blue text-[10px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 ease-in-out">
+                    Política de Privacidad
+                </a>
+            </div>
         </div>
     </footer>
 
-   <script src="oferta.js"></script>
-<script>
-    function cargarOfertas() {
-        const contenedor = document.getElementById('contenedor-ofertas');
-        
-        // 1. Verificamos si la variable existe
-        if (typeof MIS_OFERTAS !== 'undefined') {
-            
-            // 2. Filtramos para ver si hay ofertas REALES (que tengan un precio)
-            const ofertasReales = MIS_OFERTAS.filter(o => o.precioNuevo && o.precioNuevo !== "");
-
-            if (ofertasReales.length > 0) {
-                // SI HAY OFERTAS: Mostramos las tarjetas normales
-                contenedor.innerHTML = ofertasReales.map(oferta => `
-                    <div class="card-modern p-8 rounded-[2rem] h-full border border-white/5 bg-white/5 backdrop-blur-sm">
-                        <h4 class="text-blue-400 text-xs font-bold uppercase mb-2">${oferta.categoria}</h4>
-                        <p class="text-xl font-bold mb-4">${oferta.titulo}</p>
-                        <p class="text-gray-400 text-sm mb-6">${oferta.descripcion}</p>
-                        <div class="flex items-center gap-3">
-                            <p class="text-2xl font-black text-brand-blue">$${oferta.precioNuevo}*</p>
-                            ${oferta.precioViejo ? `<span class="text-gray-500 text-sm line-through">$${oferta.precioViejo}</span>` : ''}
-                        </div>
-                    </div>
-                `).join('');
-            } else {
-                // NO HAY PROMOCIONES REALES: Mostramos el mensaje de "Próximamente"
-                contenedor.innerHTML = `
-                    <div class="col-span-full py-16 text-center animate-fade-in">
-                        <div class="inline-block p-6 rounded-full bg-white/5 border border-white/10 mb-6">
-                            <i class="fas fa-bullhorn text-4xl text-brand-blue opacity-50"></i>
-                        </div>
-                        <h3 class="text-3xl font-black italic text-white mb-3">
-                            ¡Nuevas promociones <span class="text-brand-blue">próximamente!</span>
-                        </h3>
-                        <p class="text-gray-400 max-w-md mx-auto text-sm leading-relaxed">
-                            Estamos preparando los mejores precios en tecnología para usted. 
-                            Vuelva a visitarnos pronto o consulte por un producto específico.
-                        </p>
-                    </div> 
-                `;
-            }
-        }
-    }
-    document.addEventListener('DOMContentLoaded', cargarOfertas);
-</script>
-
-
+    <script src="oferta.js"></script>
     <script>
-        function cargarAnuncios() {
-    const contenedor = document.getElementById('contenedor-anuncios');
-    
-    if (typeof MIS_ANUNCIOS !== 'undefined') {
-        // Solo anuncios que tengan un título real
-        const anunciosReales = MIS_ANUNCIOS.filter(a => a.titulo && a.titulo.trim() !== "");
+         const brandLogos = [
+    { name: 'Jabra', file: 'Jabra.png' },
+    { name: 'Cisco', file: 'cisco-2.svg' },
+    { name: 'Motorola', file: 'motorola-new-logo.svg' },
+    { name: 'Epson', file: 'epson.svg' },
+    { name: 'Xiaomi', file: 'xiaomi-1.svg' },
+    { name: 'Logitech', file: 'logitech-2-1.svg' },
+     { name: 'HP', file: 'hp-5.svg' }, 
+    { name: 'Dell', file: 'dell-2.svg' },
+    { name: 'Lenovo', file: 'lenovo-1.svg' },
+    { name: 'Belkin', file: 'belkin-1.svg' },
+    { name: 'Apple', file: 'apple-13.svg' },
+    { name: 'Forza', file: 'forza.jpg' },
+    { name: 'Klip Xtreme', file: 'klipXtreme.jpg' },
+    { name: 'Nexxt Solutions', file: 'NexxtSolutions.png' },
+    { name: 'Xtech', file: 'xtech.png' }
+];
 
-        if (anunciosReales.length > 0) {
-            contenedor.innerHTML = anunciosReales.map(anuncio => `
-                <div class="card-modern p-8 rounded-[2rem] h-full border border-white/5 bg-white/5 backdrop-blur-sm">
-                    <p class="text-xl font-bold mb-4">${anuncio.titulo}</p>
-                    <p class="text-gray-400 text-sm mb-6">${anuncio.descripcion}</p>
+        function renderBrands() {
+            const container = document.getElementById('brands-container');
+            if (!container) return;
+            
+            // Duplicamos el contenido para crear el efecto infinito
+            const brandsHtml = brandLogos.map(brand => `
+                <div class="flex-shrink-0 flex items-center justify-center">
+                    <img src="./${brand.file}" 
+                         alt="${brand.name}" 
+                         class="h-6 md:h-7 w-auto object-contain opacity-30 grayscale brightness-200 hover:opacity-100 hover:grayscale-0 transition-all duration-500">
                 </div>
             `).join('');
-        } else {
             
-            contenedor.innerHTML = `
-                <div class="col-span-full py-16 text-center animate-fade-in">
-                    <div class="inline-block p-6 rounded-full bg-white/5 border border-white/10 mb-6">
-                        <i class="fas fa-bullhorn text-4xl text-brand-blue opacity-50"></i>
-                    </div>
-                    <h3 class="text-3xl font-black italic text-white mb-3">
-                        ¡Nuevos anuncios <span class="text-brand-blue">próximamente!</span>
-                    </h3>
-                </div> 
-            `;
+            container.innerHTML = brandsHtml + brandsHtml;
         }
-    }
-}
-        document.addEventListener('DOMContentLoaded', cargarAnuncios);
-    </script>   
+
+        function cargarOfertas() {
+            const contenedor = document.getElementById('contenedor-ofertas');
+            if (typeof MIS_OFERTAS !== 'undefined') {
+                const ofertasReales = MIS_OFERTAS.filter(o => o.precioNuevo && o.precioNuevo !== "");
+                if (ofertasReales.length > 0) {
+                    contenedor.innerHTML = ofertasReales.map(oferta => `
+                        <div class="card-modern p-8 rounded-[2rem] h-full border border-white/5 bg-white/5 backdrop-blur-sm">
+                            <h4 class="text-blue-400 text-xs font-bold uppercase mb-2">${oferta.categoria}</h4>
+                            <p class="text-xl font-bold mb-4">${oferta.titulo}</p>
+                            <p class="text-gray-400 text-sm mb-6">${oferta.descripcion}</p>
+                            <div class="flex items-center gap-3">
+                                <p class="text-2xl font-black text-brand-blue">$${oferta.precioNuevo}*</p>
+                                ${oferta.precioViejo ? `<span class="text-gray-500 text-sm line-through">$${oferta.precioViejo}</span>` : ''}
+                            </div>
+                        </div>
+                    `).join('');
+                } else {
+                    contenedor.innerHTML = `
+                        <div class="col-span-full py-16 text-center animate-fade-in">
+                            <div class="inline-block p-6 rounded-full bg-white/5 border border-white/10 mb-6">
+                                <i class="fas fa-bullhorn text-4xl text-brand-blue opacity-50"></i>
+                            </div>
+                            <h3 class="text-3xl font-black italic text-white mb-3">
+                                ¡Nuevas promociones <span class="text-brand-blue">próximamente!</span>
+                            </h3>
+                            <p class="text-gray-400 max-w-lg mx-auto text-base leading-loose italic">
+                                Estamos preparando los mejores precios en tecnología para usted. <br> Vuelva a visitarnos pronto o consulte por un producto específico.
+                            </p>
+                        </div> 
+                    `;
+                }
+            }
+        }
+
+        function cargarAnuncios() {
+            const contenedor = document.getElementById('contenedor-anuncios');
+            if (typeof MIS_ANUNCIOS !== 'undefined') {
+                const anunciosReales = MIS_ANUNCIOS.filter(a => a.titulo && a.titulo.trim() !== "");
+                if (anunciosReales.length > 0) {
+                    contenedor.innerHTML = anunciosReales.map(anuncio => `
+                        <div class="card-modern p-8 rounded-[2rem] h-full border border-white/5 bg-white/5 backdrop-blur-sm">
+                            <p class="text-xl font-bold mb-4">${anuncio.titulo}</p>
+                            <p class="text-gray-400 text-sm mb-6">${anuncio.descripcion}</p>
+                        </div>
+                    `).join('');
+                } else {
+                    contenedor.innerHTML = `
+                        <div class="col-span-full py-16 text-center animate-fade-in">
+                            <div class="inline-block p-6 rounded-full bg-white/5 border border-white/10 mb-6">
+                                <i class="fas fa-bullhorn text-4xl text-brand-blue opacity-50"></i>
+                            </div>
+                            <h3 class="text-3xl font-black italic text-white mb-3">
+                                ¡Nuevos anuncios <span class="text-brand-blue">próximamente!</span>
+                            </h3>
+                        </div> 
+                    `;
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderBrands();
+            cargarOfertas();
+            cargarAnuncios();
+        });
+    </script>  
+    
+    
 </body>
 </html>

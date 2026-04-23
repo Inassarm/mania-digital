@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad - Mania Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="isotipo.jpg" type="image/jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Lato', 'sans-serif'],
+                        'body': ['Lato', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-blue': '#007AFF',
+                        'brand-dark': '#0F172A',
+                        'brand-gray': '#F8FAFC',
+                        'accent-blue': '#3B82F6',
+                        'slate-custom': '#1E293B',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0F172A;
+            background-image: url('catalogo-bg.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .nav-glass {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .card-modern {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .gradient-text-blue {
+            background: linear-gradient(135deg, #3B82F6 0%, #007AFF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0F172A; }
+        ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #007AFF; }
+    </style>
+</head>
+<body class="text-white overflow-x-hidden">
+
+    <nav class="fixed top-0 w-full z-50 nav-glass">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html">
+                    <img src="../logo.png" alt="Mania Digital" class="h-9 md:h-11 w-auto object-contain">
+                </a>
+                <ul class="hidden md:flex gap-8 items-center font-bold">
+                    <li><a href="index.html" class="text-slate-500 hover:text-brand-blue transition-colors text-sm uppercase tracking-wider">Volver al Inicio</a></li>
+                    <li><a href="catalogo.html" class="px-6 py-2 bg-brand-blue text-white rounded-full text-sm hover:bg-slate-900 transition-all uppercase tracking-widest shadow-lg shadow-blue-500/20">Catálogo</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="pt-40 pb-16 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl md:text-6xl font-black italic mb-6">Política de <span class="gradient-text-blue">Privacidad</span></h1>
+            <p class="text-gray-400 text-lg uppercase tracking-[0.2em] font-bold">Última actualización: Abril 2026</p>
+        </div>
+    </header>
+
+    <main class="pb-20 px-6">
+        <div class="max-w-4xl mx-auto space-y-8">
+            
+            <section class="card-modern p-8 md:p-12 rounded-[2rem]">
+                <h2 class="text-2xl font-black italic uppercase mb-6 text-brand-blue tracking-tighter">1. Información que Recolectamos</h2>
+                <div class="space-y-4 text-gray-300 leading-relaxed">
+                    <p>En <strong>Mania Digital</strong>, la privacidad de nuestros clientes es prioridad. Recolectamos información únicamente con el fin de procesar sus cotizaciones y mejorar su experiencia de servicio.</p>
+                    <ul class="list-disc pl-5 space-y-2 text-gray-400">
+                        <li>Información de contacto (Nombre, correo electrónico, teléfono).</li>
+                        <li>Detalles de la empresa para facturación y presupuestos.</li>
+                        <li>Información técnica sobre dispositivos para servicios de reparación.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="card-modern p-8 md:p-12 rounded-[2rem]">
+                <h2 class="text-2xl font-black italic uppercase mb-6 text-brand-blue tracking-tighter">2. Uso de la Información</h2>
+                <p class="text-gray-300 leading-relaxed mb-4">Los datos proporcionados a través de nuestros formularios de cotización se utilizan exclusivamente para:</p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-white/5 p-4 rounded-xl border border-white/5 italic">
+                        <i class="fas fa-file-invoice-dollar text-brand-blue mr-2"></i> Generar presupuestos B2B precisos.
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-xl border border-white/5 italic">
+                        <i class="fas fa-truck text-brand-blue mr-2"></i> Coordinar entregas a domicilio.
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-xl border border-white/5 italic">
+                        <i class="fas fa-tools text-brand-blue mr-2"></i> Seguimiento técnico de reparaciones.
+                    </div>
+                    <div class="bg-white/5 p-4 rounded-xl border border-white/5 italic">
+                        <i class="fas fa-ad text-brand-blue mr-2"></i> Notificar ofertas y anuncios importantes.
+                    </div>
+                </div>
+            </section>
+
+            <section class="card-modern p-8 md:p-12 rounded-[2rem]">
+                <h2 class="text-2xl font-black italic uppercase mb-6 text-brand-blue tracking-tighter">3. Protección de Datos</h2>
+                <p class="text-gray-300 leading-relaxed">
+                    Implementamos medidas de seguridad técnicas y organizativas para proteger sus datos personales contra acceso no autorizado, alteración o divulgación. <strong>Mania Digital no vende ni comparte su información con terceros</strong> con fines comerciales ajenos a nuestra operación logística.
+                </p>
+            </section>
+
+            <section class="card-modern p-8 md:p-12 rounded-[2rem]">
+                <h2 class="text-2xl font-black italic uppercase mb-6 text-brand-blue tracking-tighter">4. Sus Derechos</h2>
+                <p class="text-gray-300 leading-relaxed mb-6">
+                    Usted tiene derecho a acceder, rectificar o eliminar su información personal de nuestra base de datos en cualquier momento.
+                </p>
+            
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="py-12 px-6 border-t border-white/5 bg-brand-dark">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-gray-500 text-sm font-medium uppercase tracking-[0.3em]">© 2026 Mania Digital - Sabana Sur, San José, CR</p>
+        </div>
+    </footer>
+
+</body>
+</html>
